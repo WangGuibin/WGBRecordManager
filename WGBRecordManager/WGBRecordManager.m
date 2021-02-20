@@ -11,23 +11,6 @@
 @implementation WGBRecordManager
 
 - (BOOL)isCanRecord{
-    [[RPScreenRecorder sharedRecorder] startCaptureWithHandler:^(CMSampleBufferRef  _Nonnull sampleBuffer, RPSampleBufferType bufferType, NSError * _Nullable error) {
-        if (bufferType == RPSampleBufferTypeAudioApp) {
-            //app内音频流数据
-        }
-        if (bufferType == RPSampleBufferTypeVideo) {
-            //视频流数据
-        }
-        if (bufferType == RPSampleBufferTypeAudioMic) {
-            //麦克风音频流数据
-        }
-        
-        } completionHandler:^(NSError * _Nullable error) {
-            
-        }];
-    
-    
-    
     return [RPScreenRecorder sharedRecorder].available;
 }
 - (BOOL)isRecording{
