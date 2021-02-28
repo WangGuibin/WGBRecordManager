@@ -10,7 +10,16 @@
 
 @implementation WGBRecordManager
 
-- (BOOL)isCanRecord{
++ (instancetype)shareManager{
+    static WGBRecordManager *_manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _manager = [[WGBRecordManager alloc] init];
+    });
+    return _manager;
+}
+
+- (BOOL)isAvailable{
     return [RPScreenRecorder sharedRecorder].available;
 }
 - (BOOL)isRecording{
@@ -18,7 +27,7 @@
 }
 
 - (void)startRecord{
-    if (![self isCanRecord]) {
+    if (![self isAvailable]) {
         return;
     }
     [RPScreenRecorder sharedRecorder].microphoneEnabled = self.isMicrophoneEnabled;

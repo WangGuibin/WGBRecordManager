@@ -19,12 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WGBRecordManager : NSObject
 
+///MARK:- 单例 
++ (instancetype)shareManager;
+
 @property (nonatomic,weak) id<WGBRecordLocalVideoManagerDelegate> delegate;
 //是否录音 默认NO `- startRecord`之前调用方可生效
 @property (nonatomic, getter = isMicrophoneEnabled) BOOL microphoneEnabled;
-
-- (BOOL)isCanRecord;
-- (BOOL)isRecording;
+@property (nonatomic, readonly, getter = isAvailable) BOOL available;
+@property (nonatomic, readonly, getter = isRecording) BOOL recording;
 
 - (void)startRecord;
 - (void)stopRecord;
