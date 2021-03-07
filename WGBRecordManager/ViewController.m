@@ -11,6 +11,7 @@
 #import <AVKit/AVKit.h>
 #import <Photos/Photos.h>
 #import "WGBRecordManager.h"
+#import "WGBRecordScreenVideoListViewController.h"
 
 @interface ViewController ()<WGBRecordLocalVideoManagerDelegate>
 
@@ -39,6 +40,7 @@
     [self startBallsEnter];
     [self executeAnimation];
     
+    self.view.backgroundColor = [self randomGradientLayerColor];
     UIView *testView = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 150, 100, 100)];
         [view setBackgroundColor:[UIColor purpleColor]];
@@ -71,8 +73,20 @@
     
     [self.view addSubview:self.recordBtn];
     
+     UIButton *videoFilesBtn = ({
+          UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+          [button setFrame:CGRectMake(50, 450, 200, 21)];
+          [button setTitle:@"Video Files" forState:UIControlStateNormal];
+          [button addTarget:self action:@selector(watchVideoFiles) forControlEvents:UIControlEventTouchUpInside];
+          button;
+      });
+    [self.view addSubview:videoFilesBtn];
 }
 
+- (void)watchVideoFiles{
+    WGBRecordScreenVideoListViewController *vc = [WGBRecordScreenVideoListViewController new];
+    [self presentViewController:vc animated:YES completion:nil];
+}
 
 - (void)clickRecord:(UIButton *)sender{
     if (![self.recordManager isAvailable]) {
