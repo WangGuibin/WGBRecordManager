@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter = isAvailable) BOOL available;
 @property (nonatomic, readonly, getter = isRecording) BOOL recording;
 
+///视频存放路径 默认存放在`Documents/record_screen_video/`目录下
+@property (nonatomic,copy) NSString *savePath;
+
 - (void)startRecord;
 - (void)stopRecord;
 
